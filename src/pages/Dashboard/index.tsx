@@ -86,7 +86,11 @@ const Dashboard: React.FC = () => {
               {transactions.map(transaction => (
                 <tr key={transaction.id}>
                   <td className="title">{transaction.title}</td>
-                  <td className="income">{formatValue(Number(transaction.value))}</td>
+                  {transaction.type == 'income' ? (
+                    <td className="income">{formatValue(Number(transaction.value))}</td>
+                  ) : (
+                    <td className="outcome">- {formatValue(Number(transaction.value))}</td>
+                  )}
                   <td>{transaction.category.title}</td>
                   <td>{new Date(transaction.created_at).toLocaleDateString('pt-BR')}</td>
                 </tr>
